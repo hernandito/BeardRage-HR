@@ -3,8 +3,13 @@ FROM phusion/baseimage:0.9.16
 ENV DEBIAN_FRONTEND noninteractive
 
 # Set correct environment variables
+
 ENV HOME /root
+ENV LC_ALL C.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 ENV TERM xterm
+
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
@@ -22,7 +27,7 @@ add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates univ
 apt-get update -q && \
 
 # Install Dependencies
-apt-get install -qy python python-cheetah openssl libssl-dev python-dev build-essential python-pip ca-certificates wget unrar git-core && \
+apt-get install -qy python mc python-cheetah openssl libssl-dev python-dev build-essential python-pip ca-certificates wget unrar git-core && \
 pip install setuptools && \
 pip install pyopenssl==0.13.1 && \
  
@@ -47,6 +52,11 @@ chmod +x /etc/my_init.d/edge.sh && \
 mkdir /etc/service/sickbeard && \
 mv /root/sickbeard.sh /etc/service/sickbeard/run && \
 chmod +x /etc/service/sickbeard/run
+
+ADD  gui/ /root/
+ADD sickragedits.sh /root/sickragedits.sh
+COPY -R /root/gui /opt/sickrage/gui/
+RUN chmod +x /root/sickragedits.sh
 
 EXPOSE 8081
 
