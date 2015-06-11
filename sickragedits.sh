@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cp -R /home/gui /opt/sickrage/gui/
+cp -R /root/slick /opt/sickrage/gui/
 
