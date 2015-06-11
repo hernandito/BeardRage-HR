@@ -55,7 +55,7 @@ chmod +x /etc/service/sickbeard/run
 
 ADD  gui/ /root/
 ADD sickragedits.sh /root/sickragedits.sh
-COPY -R /root/gui /opt/sickrage/gui/
+RUN cp -R /root/gui /opt/sickrage/gui/
 RUN chmod +x /root/sickragedits.sh
 
 EXPOSE 8081
